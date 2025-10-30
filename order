@@ -1,0 +1,42 @@
+package ordersystem;
+interface order {
+    void placeorder(String item);
+}
+
+class onlineorder implements order {
+    public void placeorder(String item) {
+        System.out.println("Online order placed for: " + item);
+    }
+}
+
+class phoneorder implements order {
+    public void placeorder(String item) {
+        System.out.println("Phone order placed for: " + item);
+    }
+}
+package ordersystem;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Order type (online/phone): ");
+        String type = sc.next();
+
+        System.out.print("Enter item name: ");
+        String item = sc.next();
+
+        order o;
+        if (type.equals("online")) {
+            o = new onlineorder();
+        } else {
+            o = new phoneorder();
+        }
+
+        o.placeorder(item);
+
+        sc.close();
+        
+    }
+}
+
