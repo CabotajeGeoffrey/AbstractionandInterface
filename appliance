@@ -1,0 +1,49 @@
+package appliance;
+interface Appliance {
+    void turnon();
+    void turnoff();
+}
+
+class Fan implements Appliance {
+    public void turnon() {
+        System.out.println("fan is now on.");
+    }
+
+    public void turnoff() {
+        System.out.println("fan is now off.");
+    }
+}
+
+class Light implements Appliance {
+    public void turnon() {
+        System.out.println("light is now on.");
+    }
+
+    public void turnoff() {
+        System.out.println("light is now off.");
+    }
+}
+package appliance;
+import java.util.Scanner;
+public class Main {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+			System.out.print("choose appliance (fan/light): ");
+			String choice = scanner.next();
+
+			Appliance currentappliance;
+
+			if (choice.equals("fan")) {
+			    currentappliance = new Fan();
+			} else if (choice.equals("light")) {
+			    currentappliance = new Light();
+			} else {
+			    System.out.println("invalid");
+			    return;
+			}
+
+			currentappliance.turnon();
+			currentappliance.turnoff();
+		}
+    }
+}
