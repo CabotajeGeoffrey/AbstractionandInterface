@@ -1,0 +1,47 @@
+package printer;;
+
+interface print {
+ void prt(String c);
+}
+
+class txtp implements print {
+ @Override
+ public void prt(String c) {
+     System.out.println("Printing text: " + c);
+ }
+}
+
+class imgp implements print {
+ @Override
+ public void prt(String c) {
+     System.out.println("Printing image: " + c);
+ 	}
+}
+package printer;
+import java.util.Scanner;
+public class Main {
+	 public static void main(String[] args) {
+	     Scanner sc = new Scanner(System.in);
+
+	     System.out.print("Choose printer (text/image): ");
+	     String type = sc.nextLine().toLowerCase();
+
+	     System.out.print("Enter content: ");
+	     String content = sc.nextLine();
+
+	     print p;
+
+	     if (type.equals("text")) {
+	         p = new txtp();
+	     } else if (type.equals("image")) {
+	         p = new imgp();
+	     } else {
+	         System.out.println("invalid");
+	         sc.close();
+	         return;
+	     }
+
+	     p.prt(content);
+	     sc.close();
+	 }
+}
