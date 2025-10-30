@@ -1,0 +1,42 @@
+package paymentgateway;
+interface payment {
+    void processpayment(double amt);
+}
+
+class creditcard implements payment {
+    public void processpayment(double amt) {
+        System.out.printf("paid %.2f using Credit.\n", amt);
+    }
+}
+
+class gcash implements payment {
+    public void processpayment(double amt) {
+        System.out.printf("paid %.2f using Gcash.\n", amt);
+    }
+}
+package paymentgateway;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Choose payment method (credit/gcash): ");
+        String choice = sc.next();
+
+        System.out.print("Enter amount: ");
+        double amt = sc.nextDouble();
+
+        payment p;
+
+        if (choice.equals("gcash")) {
+            p = new gcash();
+        } else {
+            p = new creditcard();
+        }
+
+        p.processpayment(amt);
+
+        sc.close();
+    }
+}
