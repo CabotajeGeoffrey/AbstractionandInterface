@@ -1,0 +1,64 @@
+package Shape;
+abstract class Shape {
+ protected abstract double calculateArea();
+}
+
+
+class Circle extends Shape {
+ private double radius;
+
+ public Circle(double radius) {
+     this.radius = radius;
+ }
+
+ @Override
+ public double calculateArea() {
+     return Math.PI * radius * radius;
+ }
+}
+
+
+class rectangle extends Shape {
+ private double length;
+ private double width;
+
+ public rectangle(double length, double width) {
+     this.length = length;
+     this.width = width;
+ }
+
+ @Override
+ public double calculateArea() {
+     return length * width;
+ 	}
+}
+package Shape;
+import java.util.Scanner;
+
+public class ShapeAreaCalculator {
+	 public static void main(String[] args) {
+	     try (Scanner scanner = new Scanner(System.in)) {
+			System.out.print("Enter shape (circle/rectangle): ");
+			 String type = scanner.nextLine().toLowerCase();
+			 Shape shape = null;
+
+			 if (type.equals("circle")) {
+			     System.out.print("Enter radius: ");
+			     double radius = scanner.nextDouble();
+			     shape = new Circle(radius);
+			 } else if (type.equals("rectangle")) {
+			     System.out.print("Enter length: ");
+			     double length = scanner.nextDouble();
+			     System.out.print("Enter width: ");
+			     double width = scanner.nextDouble();
+			     shape = new rectangle(length, width);
+			 } else {
+			     System.out.println("invalid");
+			     return;
+			 }
+
+			 double area = shape.calculateArea();
+			 System.out.println("Area = " + area);
+		}
+	 }
+}
