@@ -1,0 +1,42 @@
+package car;
+
+interface Vehicle {
+    void start();
+    void speedUp(int increment);
+}
+
+class Car implements Vehicle {
+    private int currentspeed;
+
+    public Car() {
+        this.currentspeed = 0;
+    }
+
+    @Override
+    public void start() {
+        System.out.println("car starts");
+    }
+
+    @Override
+    public void speedUp(int increment) {
+        this.currentspeed = this.currentspeed + increment;
+        System.out.println("car speed: " + this.currentspeed + " km/h");
+    }
+}
+package car;
+import java.util.Scanner;
+
+public class Main {
+    public static void main(String[] args) {
+    	Scanner scanner = new Scanner(System.in);
+Car mycar = new Car();
+        mycar.start();
+
+        System.out.print("enter speed increment: ");
+        int increment = scanner.nextInt();
+
+        mycar.speedUp(increment);
+
+        scanner.close();
+    }
+}
