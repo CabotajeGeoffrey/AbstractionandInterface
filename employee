@@ -1,0 +1,72 @@
+package employee;
+abstract class employee {
+    String name;
+
+    public employee(String name) {
+        this.name = name;
+    }
+
+    public abstract double calculatePay();
+}
+
+class fulltimeemployee extends employee {
+    double monthlysalary;
+
+    public fulltimeemployee(String name, double monthlysalary) {
+        super(name);
+        this.monthlysalary = monthlysalary;
+    }
+
+    @Override
+    public double calculatePay() {
+        return monthlysalary;
+    }
+}
+
+class parttimeemployee extends employee {
+    double rateperhour;
+    int hours;
+
+    public parttimeemployee(String name, double rateperhour, int hours) {
+        super(name);
+        this.rateperhour = rateperhour;
+        this.hours = hours;
+    }
+
+    @Override
+    public double calculatePay() {
+        return rateperhour * hours;
+    }
+}
+package employee;
+import java.util.Scanner;
+public class employeepayment {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        employee emp;
+
+        System.out.print("enter employee type (full/part): ");
+        String type = scanner.next();
+
+        if (type.equals("part")) {
+            System.out.print("enter name, rate per hour, and hours: ");
+            String name = scanner.next();
+            double rate = scanner.nextDouble();
+            int hours = scanner.nextInt();
+            emp = new parttimeemployee(name, rate, hours);
+            System.out.printf("pay: %.2f\n", emp.calculatePay());
+
+        } else if (type.equals("full")) {
+            System.out.print("enter name and monthly salary: ");
+            String name = scanner.next();
+            double salary = scanner.nextDouble();
+            emp = new fulltimeemployee(name, salary);
+            System.out.printf("pay: %.2f\n", emp.calculatePay());
+            
+        } else {
+            System.out.println("invalid");
+        }
+
+        scanner.close();
+    }
+}
